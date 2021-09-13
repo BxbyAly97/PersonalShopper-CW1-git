@@ -72,24 +72,22 @@ public class CustomerServlet extends HttpServlet {
 		
 		try {
 			switch (action) {
-				case "/new":
+				case "/CustomerServlet/new":
+					showNewForm(request, response);
 					break;
-				case "/insert":
-				break;
-				case "/delete":
+				case "/CustomerServlet/edit":
+					showEditForm(request, response);
 					break;
-				case "/edit":
-					break;
-				case "/update":
+				case "/CustomerServlet/update":
+					updateCust(request, response);
 					break;
 				default:
 					listCust(request, response);
 					break;
-			}
+				}
 		} catch (SQLException ex) {
 		throw new ServletException(ex);
 		}
-		
 		
 	}
 
@@ -139,7 +137,12 @@ public class CustomerServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 	
-	
+	//method to redirect to register page
+		private void showNewForm(HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("regPage.jsp");
+			dispatcher.forward(request, response);
+		}
 	
 	//method to get parameter, query database for existing user data and redirect to user edit page
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
@@ -175,7 +178,49 @@ public class CustomerServlet extends HttpServlet {
 		} catch (SQLException e) {
 			printSQLException(e);
 		}
+		
+		//Serve up the custEdit.jsp
+				request.setAttribute("user", existingUser);
+				request.getRequestDispatcher("/custEdit.jsp").forward(request, response);
+				
 	}
+	
+	//method to update the user data
+		private void updateCust(HttpServletRequest request, HttpServletResponse response)
+		throws SQLException, IOException {
+		System.out.println("comes to updateCust");
+		
+			//get values from the request
+			String oriName = request.getParameter("oriName");
+			String name = request.getParameter("name");
+			String password = request.getParameter("password");
+			String dob = request.getParameter("dob");
+			String address = request.getParameter("address");
+			String email = request.getParameter("email");
+			String phone = request.getParameter("phone");
+			
+			System.out.println(name);
+			System.out.println(password);
+			System.out.println(dob);
+			System.out.println(address);
+			System.out.println(email);
+			System.out.println(phone);
+		
+			//database operation
+			try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
+				statement.setString(1, name);
+				statement.setString(2, password);
+				statement.setString(3, dob);
+				statement.setString(4, address);
+				statement.setString(5, email);
+				statement.setString(6, phone);
+				statement.setString(7, oriName);
+				
+				statement.executeUpdate();
+			}
+			//redirect us back to CustomerServlet 
+			response.sendRedirect("http://localhost:8085//PersonalShopper-CW1-git/CustomerServlet");
+			}
 
 	
 	private void printSQLException(SQLException ex) {

@@ -58,7 +58,7 @@
 								<td>
 								<c:out value="${user.phone}" />
 								</td>
-								<td><a href="edit?name=<c:out value='${user.name}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="delete?name=<c:out value='${user.name}' />">Delete</a></td>
+								<td><a href="CustomerServlet/edit?name=<c:out value='${user.name}' />">Edit</a>  &nbsp;&nbsp;&nbsp;&nbsp; <a href="delete?name=<c:out value='${user.name}' />">Delete</a></td>
 							</tr>
 						</c:forEach>
 						<!-- } -->
