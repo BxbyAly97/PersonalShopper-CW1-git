@@ -81,6 +81,9 @@ public class CustomerServlet extends HttpServlet {
 				case "/CustomerServlet/update":
 					updateCust(request, response);
 					break;
+				case "/CustomerServlet/delete":
+					deleteCust(request, response);
+					break;
 				default:
 					listCust(request, response);
 					break;
@@ -222,6 +225,18 @@ public class CustomerServlet extends HttpServlet {
 			response.sendRedirect("http://localhost:8085//PersonalShopper-CW1-git/CustomerServlet");
 			}
 
+	//method to delete cust
+	private void deleteCust(HttpServletRequest request, HttpServletResponse response)
+	throws SQLException, IOException {
+		System.out.println("comes to deleteCust");
+		String name = request.getParameter("name");
+		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(DELETE_USERS_SQL);) {
+			statement.setString(1, name);
+			statement.executeUpdate();
+		}
+		//redirect us back to UserServlet !note: do change the url to your project name
+		response.sendRedirect("http://localhost:8085//PersonalShopper-CW1-git/CustomerServlet");
+		}
 	
 	private void printSQLException(SQLException ex) {
         for (Throwable e: ex) {
