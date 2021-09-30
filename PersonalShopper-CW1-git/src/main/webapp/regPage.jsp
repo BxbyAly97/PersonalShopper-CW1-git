@@ -19,7 +19,7 @@
 			Phone: <br/><input type="tel" name="phone" /><br/>
 			
 			<br/>
-			<input type="submit" value="Register"/>
+			<input type="submit" value="Register" name="Register"/>
 			</fieldset>
 		</form>
 	</body>
