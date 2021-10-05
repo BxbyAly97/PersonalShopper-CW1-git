@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
 <html>
 <head>
 <title>Personal Shopper Customer Management Application</title>
@@ -47,32 +48,29 @@ Add New User
 					<input type="hidden" name="oriName"
 						value="<c:out value='${user.name}' />" />
 				</c:if>
+				<form>
 				<fieldset class="form-group">
+				<legend>Update Customer Details</legend>
 					<label>User Name</label> <input type="text"
 						value="<c:out value='${user.name}' />" class="form-control"
 						name="name" required="required">
-				</fieldset>
-				<fieldset class="form-group">
+				
 					<label>Password</label> <input type="text"
 						value="<c:out value='${user.password}' />" class="form-control"
 						name="password">
-				</fieldset>
-				<fieldset class="form-group">
+				
 					<label>Date of Birth</label> <input type="text"
 						value="<c:out value='${user.dob}' />" class="form-control"
 						name="dob">
-				</fieldset>
-				<fieldset class="form-group">
+				
 					<label>Home Address</label> <input type="text"
 						value="<c:out value='${user.address}' />" class="form-control"
 						name="address">
-				</fieldset>
-				<fieldset class="form-group">
+				
 					<label>Email Address</label> <input type="text"
 						value="<c:out value='${user.email}' />" class="form-control"
 						name="email">
-				</fieldset>
-				<fieldset class="form-group">
+				
 					<label> Phone Number</label> <input type="text"
 						value="<c:out value='${user.phone}' />" class="form-control"
 						name="phone">
