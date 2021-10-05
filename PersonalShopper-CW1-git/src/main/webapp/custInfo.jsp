@@ -11,7 +11,6 @@
 		<body>
 		
 			<div class="row">
-				<!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
 					<div class="container">
 						<h3 class="text-center">List of Users</h3>
 						<hr>
@@ -32,7 +31,6 @@
 							</tr>
 						</thead>
 						<tbody>
-							<!-- for (Todo todo: todos) { -->
 							<c:forEach var="user" items="${listCust}">
 							<script>
 							console.log("${user.name}");
